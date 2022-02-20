@@ -16,8 +16,6 @@ object ReadAndWriteExample {
     val sparkSession = SparkSession.builder()
       .appName("Read & write example").master("local[*]")
       .withExtensions(new IcebergSparkSessionExtensions())
-      .config("spark.sql.catalog.spark_catalog", "org.apache.iceberg.spark.SparkSessionCatalog")
-      .config("spark.sql.catalog.spark_catalog.type", "hive")
       .config("spark.sql.catalog.local", "org.apache.iceberg.spark.SparkCatalog")
       .config("spark.sql.catalog.local.type", "hadoop")
       .config("spark.sql.catalog.local.warehouse", "file:///tmp/acid-file-formats/000_api/catalog")
@@ -26,22 +24,26 @@ object ReadAndWriteExample {
     val inputData = Seq(
       Order(1, 33.99d, "Order#1"), Order(2, 14.59d, "Order#2"), Order(3, 122d, "Order#3")
     ).toDF
-    // #1. It works! Spark3 runtime really means Spark 3.0 runtime!!!!
-    //     No more class incompatibility errors!
 
-    // Different semantic for writes https://iceberg.apache.org/#spark-writes/ (create, overwrite, etc.)
-    // #2. Error: The namespace in session catalog must have exactly one name part: prod.db.table;
-    //    ==> Changed to local.db.orders <=== TODO: What does each of the parts mean?
-    //    ==> Probably the format comes from Apache Spark 3.0 (catalog.database.table)
-    //        (check the blue box on https://iceberg.apache.org/#spark-queries/#inspecting-tables)
-    //        and in the config you can find I'm using "spark.sql.catalog.local"
-    inputData.writeTo("local.db.orders").create()
+    inputData.writeTo("local.db.orders_from_write_to").using("iceberg").createOrReplace()
+    sparkSession.sql("DROP TABLE IF EXISTS orders_from_sql")
+    sparkSession.sql(
+      s"""
+         |CREATE OR REPLACE TABLE local.db.orders_from_sql (
+         | id LONG,
+         | amount DOUBLE,
+         | title STRING
+         |) USING iceberg
+         |""".stripMargin)
+    sparkSession.sql(
+      """
+        |INSERT INTO local.db.orders_from_sql (id, amount, title) VALUES
+        |(1, 33.99, "Order#1"), (2, 14.59, "Order#2"), (1, 122, "Order#3")
+        |""".stripMargin)
 
-    sparkSession.table("local.db.orders").where("amount > 40").show(false)
-
-    // #3. Here we don't need to create a temporary view or anything else; the table is already in the catalog
-    //     so we can get it!
-    sparkSession.sql("SELECT * FROM local.db.orders WHERE amount > 40").show(false)
+    sparkSession.table("local.db.orders_from_write_to").where("amount > 40").show(false)
+    sparkSession.sql("SELECT * FROM local.db.orders_from_write_to WHERE amount > 40").show(false)
+    sparkSession.sql("SELECT * FROM local.db.orders_from_sql WHERE amount > 40").show(false)
   }
 
 }
