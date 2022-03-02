@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.waitingforcode.acid</groupId>
-    <artifactId>000_api_delta_lake</artifactId>
+    <artifactId>{{ series_name }}_delta_lake</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
