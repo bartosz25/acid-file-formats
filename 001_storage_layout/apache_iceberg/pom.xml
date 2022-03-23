@@ -75,6 +75,18 @@
             <artifactId>iceberg-core</artifactId>
             <version>0.13.1</version>
         </dependency>
+        <!-- uncomment to download the sources
+        <dependency>
+            <groupId>org.apache.iceberg</groupId>
+            <artifactId>iceberg-spark3</artifactId>
+            <version>0.13.1</version>
+        </dependency>-->
+        <!-- uncomment to download the sources
+        <dependency>
+            <groupId>org.apache.iceberg</groupId>
+            <artifactId>iceberg-spark3-extensions</artifactId>
+            <version>0.13.1</version>
+        </dependency>-->
         <dependency>
             <groupId>org.apache.iceberg</groupId>
             <artifactId>iceberg-spark3-runtime</artifactId>
