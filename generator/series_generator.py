@@ -1,5 +1,4 @@
 import os
-import pathlib
 import sys
 
 from jinja2 import Environment, select_autoescape, FileSystemLoader
@@ -8,7 +7,9 @@ output_dir = sys.argv[1]
 
 series_names = [
     '000_api',
-    '001_storage_layout'
+    '001_storage_layout',
+    '002_schema_evolution',
+    '003_compaction'
 ]
 env = Environment(
     loader=FileSystemLoader(searchpath='templates'),
