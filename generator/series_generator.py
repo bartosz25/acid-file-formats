@@ -10,11 +10,12 @@ series_names = [
     '001_storage_layout',
     '002_writing',
     '003_reading',
-    '004_schema_evolution',
-    '005_compaction',
-    '006_retention',
-    '007_transactions',
-    '008_streaming',
+    '004_change_data_capture',
+#    '004_schema_evolution',
+#    '005_compaction',
+#    '006_retention',
+#    '007_transactions',
+#    '008_streaming',
 ]
 env = Environment(
     loader=FileSystemLoader(searchpath='templates'),
