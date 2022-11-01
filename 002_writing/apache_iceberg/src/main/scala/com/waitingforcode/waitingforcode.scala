@@ -8,10 +8,10 @@ import java.time.Instant
 
 package object waitingforcode {
 
-  val outputDir = "/tmp/acid-file-formats/006_writing/iceberg"
+  val outputDir = "/tmp/acid-file-formats/002_writing/iceberg"
   def getIcebergSparkSession() = {
     SparkSession.builder()
-      .appName("Compaction").master("local[*]")
+      .appName("Compaction").master("local[1]")
       .withExtensions(new IcebergSparkSessionExtensions())
       .config("spark.sql.catalog.local", "org.apache.iceberg.spark.SparkCatalog")
       .config("spark.sql.catalog.local.type", "hadoop")
@@ -20,7 +20,7 @@ package object waitingforcode {
       .getOrCreate()
   }
 
-  case class Letter(id: Int, lowerCase: String, upperCase: String, nestedLetter: NestedLetter,
+  case class Letter(id: Int, upperCase: String, lowerCase: String, nestedLetter: NestedLetter,
                     creationTime: Timestamp = Timestamp.from(Instant.now()))
 
   case class NestedLetter(key: String, value: String)

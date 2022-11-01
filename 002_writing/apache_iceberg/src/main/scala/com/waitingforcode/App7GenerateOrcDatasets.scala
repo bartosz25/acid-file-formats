@@ -4,7 +4,7 @@ import org.apache.commons.io.FileUtils
 
 import java.io.File
 
-object App1GenerateDatasets {
+object App7GenerateOrcDatasets {
 
   def main(args: Array[String]): Unit = {
     FileUtils.deleteDirectory(new File(outputDir))
@@ -17,12 +17,9 @@ object App1GenerateDatasets {
       Letter(3, "C", "c", NestedLetter("key-c", "value-c"))
     ).toDF
 
-    inputData.writeTo("local.db.letters").using("iceberg").createOrReplace()
+    inputData.writeTo("local.db.letters").option("write-format", "orc").using("iceberg").createOrReplace()
 
     inputData.writeTo("local.db.letters").append()
-
-    // We should find duplicate entries because of the createOrReplace + append operations
-    sparkSession.sql("SELECT * FROM local.db.letters").show(false)
   }
 
 }
