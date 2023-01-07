@@ -11,11 +11,11 @@ series_names = [
     '002_writing',
     '003_reading',
     '004_change_data_capture',
-#    '004_schema_evolution',
-#    '005_compaction',
-#    '006_retention',
-#    '007_transactions',
-#    '008_streaming',
+    '005_compaction',
+#    '00X_schema_evolution',
+#    '00X_retention',
+#    '00X_transactions',
+#    '00X_streaming',
 ]
 env = Environment(
     loader=FileSystemLoader(searchpath='templates'),
