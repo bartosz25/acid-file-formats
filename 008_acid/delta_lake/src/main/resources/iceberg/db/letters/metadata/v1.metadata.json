@@ -1,0 +1,135 @@
+{
+  "format-version" : 1,
+  "table-uuid" : "9a246636-52b5-44ca-9446-b33a14841629",
+  "location" : "file:///tmp/acid-file-formats/002_writing/iceberg/db/letters",
+  "last-updated-ms" : 1680576109913,
+  "last-column-id" : 7,
+  "schema" : {
+    "type" : "struct",
+    "schema-id" : 0,
+    "fields" : [ {
+      "id" : 1,
+      "name" : "id",
+      "required" : false,
+      "type" : "int"
+    }, {
+      "id" : 2,
+      "name" : "upperCase",
+      "required" : false,
+      "type" : "string"
+    }, {
+      "id" : 3,
+      "name" : "lowerCase",
+      "required" : false,
+      "type" : "string"
+    }, {
+      "id" : 4,
+      "name" : "nestedLetter",
+      "required" : false,
+      "type" : {
+        "type" : "struct",
+        "fields" : [ {
+          "id" : 6,
+          "name" : "key",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "id" : 7,
+          "name" : "value",
+          "required" : false,
+          "type" : "string"
+        } ]
+      }
+    }, {
+      "id" : 5,
+      "name" : "creationTime",
+      "required" : false,
+      "type" : "timestamptz"
+    } ]
+  },
+  "current-schema-id" : 0,
+  "schemas" : [ {
+    "type" : "struct",
+    "schema-id" : 0,
+    "fields" : [ {
+      "id" : 1,
+      "name" : "id",
+      "required" : false,
+      "type" : "int"
+    }, {
+      "id" : 2,
+      "name" : "upperCase",
+      "required" : false,
+      "type" : "string"
+    }, {
+      "id" : 3,
+      "name" : "lowerCase",
+      "required" : false,
+      "type" : "string"
+    }, {
+      "id" : 4,
+      "name" : "nestedLetter",
+      "required" : false,
+      "type" : {
+        "type" : "struct",
+        "fields" : [ {
+          "id" : 6,
+          "name" : "key",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "id" : 7,
+          "name" : "value",
+          "required" : false,
+          "type" : "string"
+        } ]
+      }
+    }, {
+      "id" : 5,
+      "name" : "creationTime",
+      "required" : false,
+      "type" : "timestamptz"
+    } ]
+  } ],
+  "partition-spec" : [ ],
+  "default-spec-id" : 0,
+  "partition-specs" : [ {
+    "spec-id" : 0,
+    "fields" : [ ]
+  } ],
+  "last-partition-id" : 999,
+  "default-sort-order-id" : 0,
+  "sort-orders" : [ {
+    "order-id" : 0,
+    "fields" : [ ]
+  } ],
+  "properties" : {
+    "owner" : "bartosz"
+  },
+  "current-snapshot-id" : 7042720103030617073,
+  "snapshots" : [ {
+    "snapshot-id" : 7042720103030617073,
+    "timestamp-ms" : 1680576109913,
+    "summary" : {
+      "operation" : "append",
+      "spark.app.id" : "local-1680576104147",
+      "added-data-files" : "1",
+      "added-records" : "3",
+      "added-files-size" : "1880",
+      "changed-partition-count" : "1",
+      "total-records" : "3",
+      "total-files-size" : "1880",
+      "total-data-files" : "1",
+      "total-delete-files" : "0",
+      "total-position-deletes" : "0",
+      "total-equality-deletes" : "0"
+    },
+    "manifest-list" : "file:/tmp/acid-file-formats/002_writing/iceberg/db/letters/metadata/snap-7042720103030617073-1-bc521ca3-047b-4382-9a09-73d0b1675f09.avro",
+    "schema-id" : 0
+  } ],
+  "snapshot-log" : [ {
+    "timestamp-ms" : 1680576109913,
+    "snapshot-id" : 7042720103030617073
+  } ],
+  "metadata-log" : [ ]
+}
