@@ -9,7 +9,7 @@ import java.io.File
  * The demo should show duplicated rows streamed in case of updates.
  * Switch the "skipChangeCommits" option and rerun the demo to see the flag effect.
  */
-object App7StreamingReaderWithUpdates {
+object App9StreamingReaderWithUpdatesWithChangeDataFeed {
 
   def main(args: Array[String]): Unit = {
     val sparkSession = getDeltaLakeSparkSession(1)
@@ -36,11 +36,11 @@ object App7StreamingReaderWithUpdates {
 
     sparkSession.readStream.format("delta")
       .option("startingVersion", 0)
-      //.option("skipChangeCommits", true)
       .option("skipChangeCommits", false)
+      .option("readChangeFeed", true)
       .table(NumbersWithLettersTable)
       .writeStream.format("console")
-      .option("checkpointLocation", s"${outputDir}/checkpoint7")
+      .option("checkpointLocation", s"${outputDir}/checkpoint9")
       .start()
 
     sparkSession.streams.awaitAnyTermination()
